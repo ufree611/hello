@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- Table2csv -->
+    <script type="text/javascript" src="/static/table2csv.min.js"></script>
+    
+	<!-- Sorting -->
+	<script type="text/javascript" src="/static/sorting.js"></script>
+	
+    <title>Android Apk Bot!</title>
+    <style>
+        body{
+            background-color: #191919;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        h2
+        {
+            color: white;
+            text-transform: capitalize;
+            font-weight: 500;
+            padding: 20px;
+        }
+        
+        .box textarea
+        {
+            background: none;
+            border: 2px solid  #4E4E4E;
+            outline: none;
+            color: white;
+            border-radius: 4px;
+        }
+        
+        
+                th{
+                    cursor:pointer;
+                    color: white;
+        
+                };
+                tr, td{
+                    cursor:pointer;
+                    color: white;
+        
+                };
+                
+        </style>
+</head>
+
+<body>
+    <h2 align="center" class="border-dark">Android Apks Update Checker v1.8</h2>
+
+	<!-- Form to get url from users -->    {% csrf_token %}
+    <form method="get" action="/testing" align=center class="form-check" style="; width: 700px; margin-left: 25%; border-radius: 30px;">
+        <textarea  name=url class="apps input-group form-check-input url" placeholder="Enter Apps Link" style="height:200px"></textarea>
+        <button type="button" class="btt btn btn-danger btn-lg my-4 px-5">
+            submit
+        </button>
+    </form>
+    <table class="table myTable table-hover text-white" border=1px; id="apk" cellpadding="0" cellspacing="0">
+		<thead>
+		<tr>
+			<th class="no " onclick="sortTable()">No.&#9660;</th>
+			<th class="w-50">Apk Name</th>
+			<th class="w-25">Version</th>	
+		</tr>
+		</thead>
+        <tbody class="tablebody">
+        </tbody>
+    </table>
+        
+        <div align=center>
+      	  <button class="btn btn-success btn-lg" align=center id="dl">
+            <span class="glyphicon glyphicon-download"></span> 
+            Download List</button>
+	</div>
+	<br>
+	<!-- Export Table to csv -->
+
+<script>
+    var fName = {
+        "filename":"apk.csv"
+    };
+    $("#dl").click(function(){
+        alert("clicking");
+    $('#apk').table2csv(fName);
+    });
+
+</script>
+
+<script>
+        $('.btt').click(function(){
+            alert("Please Wait APks Version Checking");
+            //getting value and making array to store seprate value
+            var urls = $('.apps').val().split('\n');
+            //make this variable using success all list
+            var abc = 0;	
+            //compare total list num
+            var urlslength= urls.length;
+            //this loop and other function for settimput and request of urls using ajax
+            for(var j=0;j<urls.length;j++)
+            {
+                    if (new RegExp("([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?").test(urls[j])) 
+                    {
+                        var urlcheck = new URL(urls[j]);
+                        var urlchecked = urlcheck.hostname;
+                        if(urlchecked=="play.google.com")
+                        {
+                            task(j);
+                        }else{
+                            
+                            $('.tablebody').append("<tr><td>"+(j+1)+"</td><td>Wrong URL</td><td></td>");
+                        }
+                    }
+                    else{
+                        $('.tablebody').append("<tr><td>"+(j+1)+"</td><td>Blank or This is not url</td><td></td>");
+                    }
+            }
+        
+    function task(j) 
+            {
+                setTimeout(function() {
+                    var url = urls[j];
+                    url = url.replace("https://play.google.com/store/apps/details?id=","");
+                    $.ajax(
+                                {
+                                    type: 'GET',
+                                    url: '/testing',
+                                    data: {url: url},
+                                    success: function(response)
+                                    {
+                                        $('.tablebody').append("<tr><td>"+(j+1)+"</td>"+response);
+                                    },
+                                    fail: function(response)
+                                    {
+                                        alert("fail");
+                                    }
+                                }
+                            )
+            }, 4000 * j);
+        
+            }
+            
+            });
+</script>
+
+
+
+
+</body>
+
+</html>
