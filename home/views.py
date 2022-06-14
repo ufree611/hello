@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from home.models import contact
 from google_play_scraper import app
+import requests
 
 # Create your views here.
 
@@ -34,13 +35,21 @@ def contact(request):
 
 def testing(request):
     if request.method == "GET":
-        url = request.GET['url']       
-        result = app(
-            url,
-        )
-        title = result["title"]
-        version = result["version"]
-        return HttpResponse(f"<td>{title}</td><td>{version}</td>")
+        url = request.GET['url']
+        checkurl = "https://play.google.com/store/apps/details?id="+url
+        x = requests.get(checkurl)
+        v = x.status_code
+        if v == 404:
+            print("etc")
+            return HttpResponse(f"<td>404 Not Found</td><td>-</td>")
+        else:       
+            result = app(
+                url,
+            )
+            title = result["title"]
+            version = result["version"]
+            print(title,version)
+            return HttpResponse(f"<td>{title}</td><td>{version}</td>")
     
 
 
