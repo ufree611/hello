@@ -40,7 +40,6 @@ def testing(request):
         x = requests.get(checkurl)
         v = x.status_code
         if v == 404:
-            print("etc")
             return HttpResponse(f"<td>404 Not Found</td><td>-</td>")
         else:       
             result = app(
@@ -48,7 +47,6 @@ def testing(request):
             )
             title = result["title"]
             version = result["version"]
-            print(title,version)
             return HttpResponse(f"<td>{title}</td><td>{version}</td>")
     
 

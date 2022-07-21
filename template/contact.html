@@ -138,11 +138,12 @@
                     $.ajax(
                                 {
                                     type: 'GET',
-                                    url: '/testing',
+                                    url: '/testing/',
                                     data: {url: url},
                                     success: function(response)
                                     {
                                         $('.tablebody').append("<tr><td>"+(j+1)+"</td>"+response);
+                                            sortTable();
                                     },
                                     fail: function(response)
                                     {
