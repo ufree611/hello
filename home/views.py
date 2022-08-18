@@ -40,7 +40,7 @@ def testing(request):
         x = requests.get(checkurl)
         v = x.status_code
         if v == 404:
-            return HttpResponse(f"<td>404 Not Found</td><td>-</td>")
+            return HttpResponse(f"<td style='background:red;color:white'>404 Not Found</td><td>-</td>")
         else:       
             result = app(
                 url,
