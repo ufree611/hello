@@ -8,29 +8,29 @@ import requests
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
-    #return HttpResponse("THis is this")
-def contact(request):
-    titles =[]
-    titlea = []
-    # if request.method == "POST":        
-    #     text2 = request.POST.get('text1')
-    #     text2 = text2.splitlines()
-    #     for x in text2:
-    #         result = app(
-    #             x,
-    #         )
-    #         title = result["title"]
-    #         version= result["version"]
+    # return render(request, 'index.html')
+    return HttpResponse("Not A Valid Api")
+# def contact(request):
+#     titles =[]
+#     titlea = []
+#     # if request.method == "POST":        
+#     #     text2 = request.POST.get('text1')
+#     #     text2 = text2.splitlines()
+#     #     for x in text2:
+#     #         result = app(
+#     #             x,
+#     #         )
+#     #         title = result["title"]
+#     #         version= result["version"]
 
-            # titles.append(version)
-            # titlea.append(version)
-    context = {
-                "title":titles,
-                "titles":titlea,
-            }
-    return render(request, 'contact.html', context) 
-#testing
+#             # titles.append(version)
+#             # titlea.append(version)
+#     context = {
+#                 "title":titles,
+#                 "titles":titlea,
+#             }
+#     return render(request, 'contact.html', context) 
+# #testing
 
 
 def testing(request):
