@@ -1,6 +1,6 @@
 from multiprocessing import context
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from home.models import contact
 from google_play_scraper import app
 import requests
@@ -31,6 +31,9 @@ def index(request):
 #             }
 #     return render(request, 'contact.html', context) 
 # #testing
+
+def contact(request):
+    return redirect('https://alphaxtools.com/play-version/')
 
 
 def testing(request):
