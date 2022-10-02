@@ -25,14 +25,18 @@ SECRET_KEY = 'django-insecure-zi5i9xmr=q9&t4$$(kui4do(@kqap#@a6iu%oh=_w_g*_*xmi6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','hellodone.herokuapp.com']
+ALLOWED_HOSTS = ['alphaxtools.com','hellodone.herokuapp.com']
 
-
+CORS_ALLOWED_ORIGINS = [
+    "https://alphaxtools.com",
+    "http://alphaxtools.com",
+]
 # Application definition
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'django.contrib.admin',
+    "corsheaders",
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -40,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
