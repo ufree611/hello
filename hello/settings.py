@@ -28,8 +28,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['alphaxtools.com','hellodone.herokuapp.com']
 
 CORS_ALLOWED_ORIGINS = [
-    "https://alphaxtools.com",
-    "http://alphaxtools.com",
+    "https://toolshool.online/",
+    "http://toolshool.online/",
 ]
 # Application definition
 
