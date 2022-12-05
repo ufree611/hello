@@ -25,12 +25,9 @@ SECRET_KEY = 'django-insecure-zi5i9xmr=q9&t4$$(kui4do(@kqap#@a6iu%oh=_w_g*_*xmi6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['alphaxtools.com','hellodone.herokuapp.com']
+ALLOWED_HOSTS = ['toolshool.online','hellodone.herokuapp.com']
 
-CORS_ALLOWED_ORIGINS = [
-    "https://toolshool.online/",
-    "http://toolshool.online/",
-]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,6 +81,7 @@ WSGI_APPLICATION = 'hello.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
