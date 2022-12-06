@@ -33,7 +33,7 @@ def index(request):
 # #testing
 
 def contact(request):
-    return redirect('https://alphaxtools.com/play-version/')
+    return redirect('https://toolshool.online/play-version/')
 
 
 def testing(request):
