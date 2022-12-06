@@ -27,6 +27,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['hellodone.herokuapp.com','127.0.0.1']
 
+CORS_ALLOWED_ORIGINS = [
+    "https://toolshool.online",
+    "http://toolshool.online",
+    ]
 
 # Application definition
 
